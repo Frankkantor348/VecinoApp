@@ -173,7 +173,7 @@ Credenciales de prueba:
 
     Email: test@vecinoapp.com
 
-    Contraseña: Abc123
+    Contraseña: NuevaClave1234
 
 
 
