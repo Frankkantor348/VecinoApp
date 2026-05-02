@@ -1,166 +1,323 @@
-# 🚀 SOLUCIÓN RÁPIDA - Errores de Google Login y Mapa Gris
+# 🗺️ Guía de Configuración - Google Maps para VecinoApp
 
-## Tu Certificado Debug
-```
-SHA-1: 96:D7:94:C9:50:04:21:31:B6:CA:F9:66:B9:7C:95:99:0A:0A:17:59
-ApplicationID: com.vecinoapp.app
-```
+## 📋 Tu información de la app
 
----
-
-## 🔴 PROBLEMA 1: Mapa Aparece Gris ❌
-
-### ¿Por qué ocurre?
-La API Key de Google Maps NO está validada para tu certificado de desarrollo.
-
-### ✅ SOLUCIÓN (10 minutos)
-
-#### Paso 1: Ve a Google Cloud Console
-- 🔗 https://console.cloud.google.com
-- Selecciona tu proyecto (o crea uno nuevo)
-
-#### Paso 2: Habilita Google Maps API
-- Ve a **APIs & Services** → **Enabled APIs & Services**
-- Busca "Maps SDK for Android"
-- Click en **ENABLE**
-
-#### Paso 3: Registra tu certificado
-- Ve a **APIs & Services** → **Credentials**
-- Encuentra tu **API Key** para Google Maps
-- Click en la clave
-- En **Application restrictions**:
-  - Selecciona **Android apps**
-  - Click **ADD PACKAGE NAME AND FINGERPRINT**
-  - Package name: `com.vecinoapp.app`
-  - SHA-1: `96:D7:94:C9:50:04:21:31:B6:CA:F9:66:B9:7C:95:99:0A:0A:17:59`
-- Click **SAVE**
-
-#### Paso 4: Espera y prueba
-- Espera **5-10 minutos** para que se propague
-- Ejecuta:
-  ```bash
-  flutter clean
-  flutter run
-  ```
-
-**⏱️ Si sigue gris después de 10 minutos:**
-1. Verifica que Maps SDK for Android esté habilitada
-2. Verifica que el SHA-1 está correctamente registrado
-3. Limpia: `flutter clean` y `flutter run`
+| Dato | Valor |
+|------|-------|
+| **Package Name** | `com.vecinoapp.app` |
+| **SHA-1 Debug** | `B8:EC:9C:2A:7D:E3:1C:37:25:08:6D:90:DA:03:E2:4D:82:9B:D2:4E` |
 
 ---
 
-## 🔴 PROBLEMA 2: Google Sign-In No Funciona ❌
+## ❌ PROBLEMA: Google Maps Aparece en Gris
 
-### ¿Por qué ocurre?
-Falta el archivo `google-services.json` en Android y el OAuth 2.0 Client ID no está configurado.
+### Causa
+La clave de API de Google Maps NO está validada para tu certificado debug.
 
-### ✅ SOLUCIÓN (15 minutos)
+### Solución paso a paso
 
-#### Opción A: Usando Firebase (RECOMENDADO) ⭐
+#### 1. Habilitar las APIs necesarias
 
-**Paso 1: Configura Firebase**
-- 🔗 https://console.firebase.google.com
-- Crea un proyecto o selecciona "Vecinoapp"
-- Ve a **Project Settings** (⚙️ en esquina superior izquierda)
+Ve a [Google Cloud Console](https://console.cloud.google.com/)
 
-**Paso 2: Agrega tu app Android**
-- Click en **Add App** → **Android**
-- Android package name: `com.vecinoapp.app`
-- SHA-1: `96:D7:94:C9:50:04:21:31:B6:CA:F9:66:B9:7C:95:99:0A:0A:17:59`
-- Click **Continue** → **Download google-services.json**
+1. Selecciona tu proyecto
+2. Ve a **APIs & Services** → **Enabled APIs & Services**
+3. Busca y **HABILITA**:
+   - ✅ **Maps SDK for Android**
+   - ✅ **Places API** (opcional, para búsqueda de lugares)
 
-**Paso 3: Coloca el archivo**
-- Descargado: `google-services.json`
-- Cópialo a: `android/app/google-services.json`
+#### 2. Configurar la API Key
 
-**Paso 4: Verifica que google_sign_in esté habilitado en Firebase**
-- En Firebase Console → **Build** → **Authentication**
-- Habilita **Google** como proveedor
+1. En **APIs & Services** → **Credentials**
+2. Selecciona tu API Key para Google Maps (o crea una nueva)
+3. En **Application restrictions**, selecciona: **Android apps**
+4. Haz clic en **Agregar package name y huella digital**
+5. Agrega tu app:
+   - **Package name:** `com.vecinoapp.app`
+   - **SHA-1:** `B8:EC:9C:2A:7D:E3:1C:37:25:08:6D:90:DA:03:E2:4D:82:9B:D2:4E`
+6. Guarda los cambios
 
-**Paso 5: Prueba**
+#### 3. Esperar la propagación
+
+⏱️ **Espera 5-10 minutos** para que los cambios se propaguen en los servidores de Google.
+
+#### 4. Reconstruir la app
+
 ```bash
-cd d:\Proyectos.Net\frontend\vecinoapp_clean
+cd D:\Proyectos.Net\frontend\vecinoapp_clean
+
+# Limpiar caché
 flutter clean
+
+# Obtener dependencias
 flutter pub get
+
+# Ejecutar la app
 flutter run
-```
+✅ Verificación de configuración actual
+Ya configurado en el proyecto
 
----
+    ✅ AndroidManifest.xml tiene la API Key de Google Maps
 
-#### Opción B: Configurar en Google Cloud Console (si prefieres)
+    ✅ Permisos de ubicación en AndroidManifest.xml
 
-1. Ve a https://console.cloud.google.com
-2. **APIs & Services** → **Credentials**
-3. **Create Credentials** → **OAuth 2.0 Client IDs**
-4. Application type: **Android**
-5. Package name: `com.vecinoapp.app`
-6. SHA-1: `96:D7:94:C9:50:04:21:31:B6:CA:F9:66:B9:7C:95:99:0A:0A:17:59`
-7. Create
+    ✅ Dependencias instaladas (google_maps_flutter)
 
----
+Lo que debes hacer tú
 
-## 🧪 Verificación Final
+    ⚠️ Habilitar Maps SDK for Android en Google Cloud Console
+
+    ⚠️ Restringir tu API Key con tu package name y SHA-1
+
+🧪 Después de la configuración
 
 Ejecuta estos comandos en orden:
+bash
 
-```bash
-# Navega al proyecto
-cd d:\Proyectos.Net\frontend\vecinoapp_clean
+cd D:\Proyectos.Net\frontend\vecinoapp_clean
 
-# Limpia el cache y archivos previos
+# Limpiar cache
+flutter clean
+
+# Obtener dependencias
+flutter pub get
+
+# Ejecutar la app
+flutter run
+
+Si el mapa sigue en gris después de 10 minutos:
+
+    Verifica que la API Key está activa en Google Cloud Console
+
+    Asegúrate que "Maps SDK for Android" está habilitada
+
+    Verifica que el SHA-1 sea el correcto ejecutando:
+    bash
+
+    cd android
+    ./gradlew signingReport
+
+    Limpia todo y reconstruye:
+    bash
+
+    flutter clean
+    flutter pub get
+    flutter run
+
+📝 Nota importante
+
+Google Sign-In no está disponible en esta versión. La autenticación se realiza mediante email y contraseña.
+
+Credenciales de prueba:
+
+    Email: test@vecinoapp.com
+
+    Contraseña: Abc123
+
+📞 Soporte
+
+Si necesitas más ayuda:
+
+    Revisa la consola de Android Studio para errores
+
+    Ejecuta: flutter run -v para logs detallados
+
+    Busca errores relacionados con "Google Maps" en los logs
+
+
+# 🗺️ SOLUCIÓN RÁPIDA - Error de Mapa Gris
+
+## 📋 Tu certificado debug
+
+| Dato | Valor |
+|------|-------|
+| **Package Name** | `com.vecinoapp.app` |
+| **SHA-1 Debug** | `B8:EC:9C:2A:7D:E3:1C:37:25:08:6D:90:DA:03:E2:4D:82:9B:D2:4E` |
+
+---
+
+## 🔴 PROBLEMA: Mapa Aparece Gris ❌
+
+### ¿Por qué ocurre?
+
+La API Key de Google Maps NO está validada para tu certificado de desarrollo.
+
+---
+
+## ✅ SOLUCIÓN (10 minutos)
+
+### Paso 1: Ve a Google Cloud Console
+
+🔗 [https://console.cloud.google.com](https://console.cloud.google.com)
+
+- Selecciona tu proyecto (o crea uno nuevo)
+- Si no tienes proyecto, crea uno nuevo: "VecinoApp-Maps"
+
+---
+
+### Paso 2: Habilita Google Maps API
+
+1. Ve a **APIs & Services** → **Enabled APIs & Services**
+2. Haz clic en **+ ENABLE APIS AND SERVICES**
+3. Busca **"Maps SDK for Android"**
+4. Haz clic en **ENABLE**
+
+---
+
+### Paso 3: Configura tu API Key
+
+1. Ve a **APIs & Services** → **Credentials**
+2. Encuentra tu API Key para Google Maps (o créala):
+   - **Create Credentials** → **API Key**
+   - Copia la clave generada
+3. Haz clic en el ícono de **lápiz** para editar la clave
+4. En **Application restrictions**, selecciona: **Android apps**
+5. Haz clic en **ADD PACKAGE NAME AND FINGERPRINT**
+6. Agrega tu app:
+   - **Package name:** `com.vecinoapp.app`
+   - **SHA-1:** `B8:EC:9C:2A:7D:E3:1C:37:25:08:6D:90:DA:03:E2:4D:82:9B:D2:4E`
+7. Haz clic en **DONE**
+8. En **API restrictions**, selecciona: **Restrict key** → **Maps SDK for Android**
+9. Haz clic en **SAVE**
+
+---
+
+### Paso 4: Agrega la API Key en tu proyecto
+
+Abre el archivo: `android/app/src/main/AndroidManifest.xml`
+
+Agrega dentro de `<application>`:
+
+```xml
+<meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="TU_API_KEY_AQUI" />
+
+Paso 5: Espera y prueba
+
+⏱️ Espera 5-10 minutos para que los cambios se propaguen.
+
+Luego ejecuta:
+bash
+
+cd D:\Proyectos.Net\frontend\vecinoapp_clean
+
+# Limpiar cache
+flutter clean
+
+# Obtener dependencias
+flutter pub get
+
+# Ejecutar la app
+flutter run
+
+🧪 Verificación final
+
+Ejecuta estos comandos en orden:
+bash
+
+cd D:\Proyectos.Net\frontend\vecinoapp_clean
+
+# Limpia el cache
 flutter clean
 
 # Obtén las dependencias
 flutter pub get
 
-# Ejecuta con logs detallados
-flutter run -v
-```
+# Ejecuta la app
+flutter run
 
----
+📊 Checklist de configuración
 
-## 📊 Checklist de Configuración
+    ¿Tienes un proyecto en Google Cloud Console?
 
-- [ ] SHA-1 registrado en Google Cloud Console
-- [ ] Maps SDK for Android habilitada
-- [ ] OAuth 2.0 Client ID creado para Android
-- [ ] `google-services.json` descargado y colocado en `android/app/`
-- [ ] `flutter clean` ejecutado
-- [ ] `flutter run` ejecutado sin errores
+    ¿Habilitaste Maps SDK for Android?
 
----
+    ¿Configuraste tu API Key con restricción de Android app?
 
-## 🆘 Si aún hay problemas...
+    ¿Registraste el Package name y SHA-1 correcto?
 
-### Mapa sigue gris:
-```bash
+    ¿Agregaste la API Key en AndroidManifest.xml?
+
+    ¿Ejecutaste flutter clean?
+
+    ¿Ejecutaste flutter run?
+
+🔍 Si el mapa sigue en gris después de 10 minutos
+1. Verifica la API Key
+
+    Ve a Google Cloud Console → Credentials
+
+    Verifica que la API Key esté activa
+
+    Verifica que Maps SDK for Android esté habilitada
+
+2. Verifica el SHA-1
+
+Ejecuta este comando y confirma que el SHA-1 sea el mismo:
+bash
+
+cd android
+./gradlew signingReport
+
+Busca Variant: debug → SHA1: B8:EC:9C:2A:7D:E3:1C:37:25:08:6D:90:DA:03:E2:4D:82:9B:D2:4E
+3. Limpieza completa
+bash
+
 # Desinstala la app completamente
 adb uninstall com.vecinoapp.app
 
-# Limpia y ejecuta nuevamente
+# Limpia todo
 flutter clean
+
+# Reconstruye
+flutter pub get
 flutter run
-```
 
-### Google Login sigue fallando:
-1. Verifica que `google-services.json` existe en `android/app/`
-2. Verifica el contenido del archivo (no debe estar vacío)
-3. Revisa los logs:
-   ```bash
-   flutter run -v | findstr "Google\|Sign\|error"
-   ```
+4. Ver logs detallados
+bash
 
-### Logs detallados:
-```bash
-# Ver todos los logs de Google
-flutter run -v 2>&1 | findstr "Google"
+flutter run -v 2>&1 | findstr "Maps"
 
-# Ver errores específicos
-adb logcat | findstr "Google\|Maps"
-```
+💡 Tips importantes
+Tip	Explicación
+⏱️ Espera después de cambios	Los cambios en Google Cloud pueden tardar 5-10 minutos
+🧹 Siempre haz flutter clean	Antes de probar cambios importantes
+📝 Verifica nombres exactos	El package name debe ser exactamente com.vecinoapp.app
+🔑 Re-stringe tu API Key	Nunca dejes una API Key sin restricciones
+📝 Nota importante
 
----
+Google Sign-In no está disponible en esta versión. La autenticación se realiza mediante email y contraseña.
+
+Credenciales de prueba:
+
+    Email: test@vecinoapp.com
+
+    Contraseña: Abc123
+
+🔗 Enlaces útiles
+
+    Google Cloud Console
+
+    Maps SDK for Android documentation
+
+    Obtener tu huella SHA-1
+
+🆘 ¿Sigue sin funcionar?
+
+Si después de seguir todos los pasos el mapa sigue en gris:
+
+    Revisa la consola de Android Studio para errores específicos
+
+    Ejecuta: flutter run -v y busca errores de "Maps" o "API Key"
+
+    Contacta al desarrollador con los logs de error
+
+text
+
+
+
+
 
 ## 💡 Tips importantes
 
