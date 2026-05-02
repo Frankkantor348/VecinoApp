@@ -1,0 +1,59 @@
+name: vecinoapp
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  provider: ^6.1.1
+
+  # UI
+  cupertino_icons: ^1.0.8
+  
+  # Networking
+  http: ^1.1.0
+  http_parser: ^4.0.0
+  
+  # Storage
+  shared_preferences: ^2.2.0
+  
+  # Location
+  geolocator: ^10.1.1
+  
+  # Google Maps
+  google_maps_flutter: ^2.5.0
+  location: ^5.0.3
+  
+  # Google Sign In (actualizado)
+  google_sign_in: ^6.3.0
+ 
+  
+  # IMAGE PICKER
+  image_picker: ^1.0.4
+  
+  # PATH PROVIDER
+  path_provider: ^2.1.1
+  
+  # URL LAUNCHER
+  url_launcher: ^6.2.5
+  
+  # Google Play Services
+  google_maps_flutter_android: ^2.19.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/

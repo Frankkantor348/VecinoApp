@@ -1,0 +1,104 @@
+# ==========================================
+# ARCHIVOS SENSIBLES (NUNCA SUBIR)
+# ==========================================
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+.env
+*.env
+*.pem
+*.p12
+*.key
+*.keystore
+*.jks
+*.pfx
+secrets.json
+credentials.json
+android/key.properties
+android/app/debug.keystore
+android/app/release.keystore
+
+# ==========================================
+# BACKEND .NET (C#) - Porque tienes backend en la misma carpeta
+# ==========================================
+**/bin/
+**/obj/
+**/out/
+**/packages/
+.vs/
+**/*.user
+**/*.suo
+**/*.sln.docstates
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+**/Migrations/*.Designer.cs
+**/Migrations/*.sql
+**/*.db
+**/*.sqlite
+
+# ==========================================
+# FLUTTER / DART
+# ==========================================
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+*.lock
+*.log
+*.iml
+*.ipr
+*.iws
+
+# ==========================================
+# ANDROID
+# ==========================================
+/android/app/debug
+/android/app/profile
+/android/app/release
+android/.gradle/
+android/local.properties
+android/**/build/
+*.apk
+*.aab
+
+# ==========================================
+# IOS
+# ==========================================
+ios/Pods/
+ios/Podfile.lock
+ios/Flutter/AppFrameworkInfo.plist
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/.symlinks/
+
+# ==========================================
+# IDE Y EDITORES
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history/
+.svn/
+.swiftpm/
+
+# ==========================================
+# MISCELÁNEOS
+# ==========================================
+*.class
+*.pyc
+migrate_working_dir/
+app.*.symbols
+app.*.map.json
+Thumbs.db
+*.tmp
+*.bak
