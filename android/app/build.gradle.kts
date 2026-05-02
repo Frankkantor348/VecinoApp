@@ -5,6 +5,18 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// ========== CARGAR VARIABLES DE ENTORNO ==========
+val keyPropertiesFile = rootProject.file("key.properties")
+val keyProperties = java.util.Properties()
+
+if (keyPropertiesFile.exists()) {
+    keyProperties.load(keyPropertiesFile.inputStream())
+    println("✅ key.properties cargado correctamente")
+} else {
+    println("⚠️ key.properties no encontrado. La API Key de Maps no estará configurada.")
+}
+// ========== FIN CARGA DE VARIABLES ==========
+
 android {
     namespace = "com.vecinoapp.vecinoapp"
     compileSdk = flutter.compileSdkVersion
@@ -28,6 +40,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        
+        // ========== PASAR API KEY AL AndroidManifest.xml ==========
+        manifestPlaceholders["mapsApiKey"] = keyProperties.getProperty("MAPS_API_KEY", "")
     }
 
     buildTypes {
