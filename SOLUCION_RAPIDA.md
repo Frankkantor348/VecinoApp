@@ -313,12 +313,6 @@ Si después de seguir todos los pasos el mapa sigue en gris:
 
     Contacta al desarrollador con los logs de error
 
-text
-
-
-
-
-
 ## 💡 Tips importantes
 
 1. **Espera después de cambios en Google Cloud**: Los cambios pueden tardar 5-10 minutos
@@ -326,7 +320,6 @@ text
 3. **Verifica nombres exactos**: El package name debe ser exactamente `com.vecinoapp.app`
 4. **Los archivos importan**: `google-services.json` debe estar en `android/app/` NO en otro lado
 
----
 
 ## 🔗 Enlaces útiles
 
