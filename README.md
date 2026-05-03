@@ -1,4 +1,4 @@
-# 🏪 VeciNoApp
+# 🏪 VecinoApp
 
 Aplicación móvil para descubrir negocios cercanos en tu barrio.
 
